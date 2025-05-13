@@ -31,7 +31,7 @@ namespace ToHooks
 { 
 	bool (*CantBuild)(UWorld* World, TSubclassOf<ABuildingActor> BuildingClassData, const FVector_NetQuantize10& BuildLoc, const FRotator& BuildRot, bool bMirrored, TArray<ABuildingSMActor*>* ExistingBuildings);
 	ABuildingSMActor* (*ReplaceBuildingActor)(ABuildingSMActor* BuildingActor, unsigned int a2, TSubclassOf<ABuildingSMActor> NewBuildingClass, int32 CurrentBuildingLevel, int32 RotationIterations, bool bMirrored, AFortPlayerController* PlayerController);
-	__int64 (*DispatchRequest)(__int64 a1, __int64* a2, int a3);
+	__int64 (*DispatchRequest)(__int64 a1, FProfileHttpRequest* a2);
 	void (*ApplyCharacterCustomization)(AFortPlayerState* PlayerState, AFortPawn* Pawn);
 	ENetMode (*GetNetMode)(ENetMode NetMode);
 	void (*PickupDelay)(AFortPickup* Pickup);
@@ -179,11 +179,11 @@ namespace Hooks
 		return ToHooks::PickupDelay(Pickup);
 	}
 
-	static __int64 DispatchRequestHook(__int64 a1, __int64* a2, int a3)
+	static __int64 DispatchRequestHook(__int64 a1, FProfileHttpRequest* a2)
 	{
 		*(int*)(__int64(a2) + 0x60) = 3;
 
-		return ToHooks::DispatchRequest(a1, a2, 3);
+		return ToHooks::DispatchRequest(a1, a2);
 	}
 
 	static bool LocalSpawnPlayActorHook()

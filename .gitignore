@@ -24,9 +24,9 @@
 *.lai
 *.la
 *.a
-*.lib
 
 # Executables
 *.exe
 *.out
 *.app
+/GameServer-2.5/obj
